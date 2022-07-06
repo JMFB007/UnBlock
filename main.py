@@ -12,6 +12,13 @@ entidades = []#do these even go here?
 class Game(object):
     def __init__(self, screen):
         self.screen = screen
+        self.game_over = False
+        self.blocks = pygame.sprite.Group()
+        self.sprites = pygame.sprite.Group()
+        self.player = Player()
+        self.player.rect.x = width//2
+        self.player.rect.y = height//2
+        self.sprites.add(self.player)
 
     def events(self):
         for event in pygame.event.get():
@@ -60,6 +67,7 @@ class Game(object):
             y += hrow
             pygame.draw.line(screen,color,(x,0),(x,width))
             pygame.draw.line(screen,color,(0,y),(width,y))
+
 def main():
     pygame.init()
     screen = pygame.display.set_mode((width, height))
@@ -71,6 +79,9 @@ def main():
 
     open = True
     while open:
+        open = game.process_events()#teclas y situaciones
+        game.run_logic()
+        game.display_frame(screen)
         clock.tick(5)
     pygame.quit()
 
