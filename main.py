@@ -72,16 +72,16 @@ def main():
     pygame.init()
     screen = pygame.display.set_mode((width, height))
     pygame.display.set_caption("UnBlock")
-    logo = pygame.image.load("UnBlock/Data/GraphicFx/Ball.png").convert_alpha()
+    logo = pygame.image.load("Data/GraphicFx/Ball.png").convert_alpha()
     pygame.display.set_icon(logo)
     clock = pygame.time.Clock()
     game = Game(screen)
 
     open = True
     while open:
-        open = game.process_events()#teclas y situaciones
-        game.run_logic()
-        game.display_frame(screen)
+        open = game.events()#teclas y situaciones
+        game.logic()
+        game.display(screen)
         clock.tick(5)
     pygame.quit()
 
